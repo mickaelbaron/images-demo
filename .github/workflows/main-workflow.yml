@@ -14,8 +14,7 @@ jobs:
       context: java-minimal
       test: true
       base_image: base
-      python_version_1: 3.10.9
-      python_version_2: 3.9.16
+      python_version_1: openjdk-17
       branch: ${{ github.ref }}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}

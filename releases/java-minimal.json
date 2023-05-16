@@ -1,0 +1,7 @@
+[
+    {
+        "base_image":"base:latest",
+        "output_image":"python-minimal-delim-py:python_version_1",
+        "python_version":":python_version_1"
+    }
+]
