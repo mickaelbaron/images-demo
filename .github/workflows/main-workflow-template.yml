@@ -91,6 +91,7 @@ jobs:
         matrix=$(cat ./releases/${{ inputs.image }}.json | jq .)
         echo $matrix
         echo "matrix={\"include\":$(echo $matrix)}" >> $GITHUB_OUTPUT
+        echo "coucou"
   docker:
     runs-on: ubuntu-latest
     needs: matrix_prep
