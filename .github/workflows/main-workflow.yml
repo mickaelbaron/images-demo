@@ -25,7 +25,7 @@ jobs:
     uses: ./.github/workflows/main-workflow-template.yml
     with:
       image: vscode-java
-      context: vscode-java
+      context: vscode
       test: true
       base_image: java-minimal
       java_version_1: openjdk-17
