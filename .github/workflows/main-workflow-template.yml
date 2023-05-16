@@ -80,11 +80,11 @@ jobs:
     - id: set-matrix
       run: |
         base_image_escaped=$(echo ${{inputs.base_image}} | sed 's/\//\\\//g' )
-        echo "ici"
         echo $base_image_escaped
-        echo "là"
         sed -i "s/:base_image/$base_image_escaped/g" ./releases/${{ inputs.image }}.json
+        more ./releases/${{ inputs.image }}.json
         sed -i "s/:python_version_1/${{inputs.python_version_1}}/g" ./releases/${{ inputs.image }}.json
+        more ./releases/${{ inputs.image }}.json
         sed -i "s/:python_version_2/${{inputs.python_version_2}}/g" ./releases/${{ inputs.image }}.json        
         more ./releases/${{ inputs.image }}.json
         matrix=$(cat ./releases/${{ inputs.image }}.json | jq .)
