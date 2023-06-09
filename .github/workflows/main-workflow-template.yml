@@ -35,26 +35,6 @@ on:
         description: is base image from another organization
         required: false
         type: boolean
-      python_version_1:
-        description: context of docker image
-        required: false
-        type: string
-      python_version_2:
-        description: context of docker image
-        required: false
-        type: string
-      r_version_1:
-        description: context of docker image
-        required: false
-        type: string
-      r_version_2:
-        description: context of docker image
-        required: false
-        type: string
-      spark_version:
-        description: context of docker image
-        required: false
-        type: string
       branch:
         description: branch that triggered the workflow
         required: false
@@ -64,6 +44,10 @@ on:
         required: false
         type: string
       java_version_2:
+        description: context of docker image
+        required: false
+        type: string
+      java_version_3:
         description: context of docker image
         required: false
         type: string
@@ -91,13 +75,9 @@ jobs:
         base_image_gpu_escaped=$(echo ${{inputs.base_image_gpu}} | sed 's/\//\\\//g' )
         sed -i "s/:base_image_gpu/$base_image_gpu_escaped/g" ./releases/${{ inputs.image }}.json
         sed -i "s/:base_image/$base_image_escaped/g" ./releases/${{ inputs.image }}.json
-        sed -i "s/:python_version_1/${{inputs.python_version_1}}/g" ./releases/${{ inputs.image }}.json
-        sed -i "s/:python_version_2/${{inputs.python_version_2}}/g" ./releases/${{ inputs.image }}.json
-        sed -i "s/:r_version_1/${{inputs.r_version_1}}/g" ./releases/${{ inputs.image }}.json
-        sed -i "s/:r_version_2/${{inputs.r_version_2}}/g" ./releases/${{ inputs.image }}.json
         sed -i "s/:java_version_1/${{inputs.java_version_1}}/g" ./releases/${{ inputs.image }}.json
         sed -i "s/:java_version_2/${{inputs.java_version_2}}/g" ./releases/${{ inputs.image }}.json
-        sed -i "s/:spark_version/${{inputs.spark_version}}/g" ./releases/${{ inputs.image }}.json
+        sed -i "s/:java_version_3/${{inputs.java_version_3}}/g" ./releases/${{ inputs.image }}.json        
         matrix=$(cat ./releases/${{ inputs.image }}.json | jq .)
         echo $matrix
         echo "matrix={\"include\":$(echo $matrix)}" >> $GITHUB_OUTPUT
@@ -192,9 +172,7 @@ jobs:
           tags: ${{ steps.generate-tags.outputs.tags }}
           build-args: |
             BASE_IMAGE=${{ steps.generate-build-args.outputs.base_image }}
-            PYTHON_VERSION=${{ matrix.python_version }}
-            R_VERSION=${{ matrix.r_version }}
-            SPARK_VERSION=${{ matrix.spark_version }}
+            JAVA_VERSION=${{ matrix.java_version }}
           secrets: |
             "github_token=${{ secrets.GITHUB_PAT }}"
 
@@ -221,8 +199,6 @@ jobs:
           tags: ${{ steps.generate-tags.outputs.tags }}
           build-args: |
             BASE_IMAGE=${{ steps.generate-build-args.outputs.base_image }}
-            PYTHON_VERSION=${{ matrix.python_version }}
-            R_VERSION=${{ matrix.r_version }}
-            SPARK_VERSION=${{ matrix.spark_version }}
+            JAVA_VERSION=${{ matrix.java_version }}
           secrets: |
             "github_token=${{ secrets.GITHUB_PAT }}"
