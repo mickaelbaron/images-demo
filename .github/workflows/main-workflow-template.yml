@@ -154,6 +154,7 @@ jobs:
             fi
             echo "base_image=${final_name}" >> $GITHUB_OUTPUT
             echo $final_name
+            echo $GITHUB_OUTPUT
         shell: bash
 
       - name: Generate output tags
