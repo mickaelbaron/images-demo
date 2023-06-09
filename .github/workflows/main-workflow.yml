@@ -14,7 +14,9 @@ jobs:
       context: java-minimal
       test: true
       base_image: base
-      java_version_1: openjdk-17
+      java_version_1: 11
+      java_version_2: 17
+      java_version_3: 20
       branch: ${{ github.ref }}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
