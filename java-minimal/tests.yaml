@@ -39,8 +39,8 @@ commandTests:
   - name: "Does the binary exists?"
     command: "which"
     args: ["java"]
-    expectedOutput: ["/usr/local/openjdk-17/bin/java"]
+    expectedOutput: ["/usr/local/openjdk/bin/java"]
   - name: "Does the binary exists?"
     command: "which"
     args: ["javac"]
-    expectedOutput: ["/usr/local/openjdk-17/bin/javac"]
+    expectedOutput: ["/usr/local/openjdk/bin/javac"]
